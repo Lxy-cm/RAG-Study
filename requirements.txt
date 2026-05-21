@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+temporalio
+python-dotenv
+pydantic
+langchain-openai
+langchain-core
+langchain-chroma
+langchain-huggingface
+langchain-classic
+langchain-text-splitters
+sentence-transformers

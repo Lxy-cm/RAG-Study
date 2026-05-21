@@ -4,12 +4,10 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv 
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
-import os
+
+from config import Config
 
 load_dotenv()  
-
-# 获取 API 密钥
-ZHIPU_API_KEY = os.getenv("ZHIPU_API_KEY")  
 
 # 1. 定义期望的数据结构
 class RouteQuery(BaseModel):
@@ -25,9 +23,9 @@ class RouteQuery(BaseModel):
 
 # 2. 初始化大模型
 llm = ChatOpenAI(
-    model="glm-4", 
-    api_key=ZHIPU_API_KEY, 
-    base_url="https://open.bigmodel.cn/api/paas/v4/", 
+    model=Config.LLM_MODEL_NAME,
+    api_key=Config.LLM_API_KEY,
+    base_url=Config.LLM_BASE_URL,
     temperature=0
 )
 

@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RAG 问答测试页</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+        processEscapes: true
+      },
+      chtml: {
+        scale: 1
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      color: #172033;
+      background: #f4f7fb;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    header {
+      grid-column: 1 / -1;
+      padding: 18px 24px;
+      background: #ffffff;
+      border-bottom: 1px solid #dce3ee;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .meta {
+      margin-top: 6px;
+      color: #637083;
+      font-size: 13px;
+    }
+
+    .messages {
+      width: min(960px, 100%);
+      margin: 0 auto;
+      padding: 22px 16px 120px;
+    }
+
+    .sidebar {
+      grid-row: 2 / 4;
+      padding: 14px;
+      border-right: 1px solid #dce3ee;
+      background: #ffffff;
+      overflow-y: auto;
+    }
+
+    .sidebar-title {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .new-chat {
+      min-width: 0;
+      height: 34px;
+      padding: 0 10px;
+      font-size: 13px;
+    }
+
+    .conversation-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .conversation-item {
+      width: 100%;
+      min-height: 46px;
+      height: auto;
+      padding: 8px 10px;
+      border: 1px solid #dce3ee;
+      border-radius: 8px;
+      color: #172033;
+      background: #f8fafc;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .conversation-item.active {
+      color: #ffffff;
+      border-color: #2563eb;
+      background: #2563eb;
+    }
+
+    .conversation-count {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .message {
+      display: flex;
+      margin: 14px 0;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .bubble {
+      max-width: min(720px, 86vw);
+      padding: 12px 14px;
+      border: 1px solid #dce3ee;
+      border-radius: 8px;
+      line-height: 1.65;
+      font-size: 15px;
+      background: #ffffff;
+    }
+
+    .bubble p {
+      margin: 0 0 10px;
+    }
+
+    .bubble p:last-child {
+      margin-bottom: 0;
+    }
+
+    .bubble h3 {
+      margin: 14px 0 8px;
+      font-size: 16px;
+    }
+
+    .bubble ul {
+      margin: 8px 0 8px 22px;
+      padding: 0;
+    }
+
+    .bubble li {
+      margin: 4px 0;
+    }
+
+    .math-display {
+      overflow-x: auto;
+    }
+
+    .citations {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #e4eaf3;
+      color: #526174;
+      font-size: 13px;
+    }
+
+    .citation {
+      margin-top: 6px;
+      padding: 7px 8px;
+      border-radius: 6px;
+      background: #f8fafc;
+    }
+
+    .citation strong {
+      color: #334155;
+    }
+
+    .citation-title {
+      color: #1e293b;
+      font-weight: 700;
+    }
+
+    .citation-meta {
+      margin-top: 2px;
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .citation-snippet {
+      margin-top: 5px;
+      color: #475569;
+    }
+
+    .user .bubble {
+      color: #ffffff;
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+
+    .assistant .bubble {
+      background: #ffffff;
+    }
+
+    .empty {
+      margin-top: 80px;
+      text-align: center;
+      color: #637083;
+    }
+
+    .composer {
+      position: fixed;
+      left: 260px;
+      right: 0;
+      bottom: 0;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.96);
+      border-top: 1px solid #dce3ee;
+    }
+
+    .composer-inner {
+      width: min(960px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 48px;
+      max-height: 150px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid #c8d2e0;
+      border-radius: 8px;
+      font: inherit;
+      line-height: 1.5;
+      outline: none;
+      background: #ffffff;
+    }
+
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+    }
+
+    button {
+      min-width: 86px;
+      height: 48px;
+      border: 0;
+      border-radius: 8px;
+      color: #ffffff;
+      background: #2563eb;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      background: #93a4bd;
+    }
+
+    .error {
+      margin: 10px auto 0;
+      width: min(960px, 100%);
+      color: #b42318;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .app {
+        display: block;
+      }
+
+      .sidebar {
+        max-height: 180px;
+        border-right: 0;
+        border-bottom: 1px solid #dce3ee;
+      }
+
+      .composer {
+        left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>RAG 问答测试页</h1>
+      <div id="currentConversation" class="meta">后端接口：http://localhost:8000</div>
+    </header>
+
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <span>对话</span>
+        <button id="newChat" class="new-chat" type="button">新建</button>
+      </div>
+      <div id="conversationList" class="conversation-list"></div>
+    </aside>
+
+    <main id="messages" class="messages">
+      <div class="empty">输入一个高数问题，点击发送。</div>
+    </main>
+
+    <form id="composer" class="composer">
+      <div class="composer-inner">
+        <textarea id="question" placeholder="例如：导数的几何意义是什么？"></textarea>
+        <button id="send" type="submit">发送</button>
+      </div>
+      <div id="error" class="error"></div>
+    </form>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin;
+    let currentConversationId = localStorage.getItem("rag_current_conversation_id") || "";
+    let conversations = [];
+    const currentConversationEl = document.getElementById("currentConversation");
+    const conversationListEl = document.getElementById("conversationList");
+    const newChatEl = document.getElementById("newChat");
+    const messagesEl = document.getElementById("messages");
+    const formEl = document.getElementById("composer");
+    const questionEl = document.getElementById("question");
+    const sendEl = document.getElementById("send");
+    const errorEl = document.getElementById("error");
+
+    function escapeHtml(value = "") {
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function renderInlineMarkdown(value) {
+      let html = escapeHtml(value);
+      html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+      return html;
+    }
+
+    function renderMarkdown(value) {
+      const normalized = value.replace(/\r\n/g, "\n");
+      const blocks = [];
+      let remaining = normalized;
+
+      remaining = remaining.replace(/\$\$([\s\S]*?)\$\$/g, (_, math) => {
+        const token = `@@MATH_BLOCK_${blocks.length}@@`;
+        blocks.push(`<div class="math-display">$$${escapeHtml(math.trim())}$$</div>`);
+        return token;
+      });
+
+      const lines = remaining.split("\n");
+      const html = [];
+      let listItems = [];
+
+      function flushList() {
+        if (listItems.length) {
+          html.push(`<ul>${listItems.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join("")}</ul>`);
+          listItems = [];
+        }
+      }
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed) {
+          flushList();
+          continue;
+        }
+
+        const listMatch = trimmed.match(/^[-*]\s+(.+)$/);
+        if (listMatch) {
+          listItems.push(listMatch[1]);
+          continue;
+        }
+
+        flushList();
+        const headingMatch = trimmed.match(/^#{1,3}\s+(.+)$/);
+        if (headingMatch) {
+          html.push(`<h3>${renderInlineMarkdown(headingMatch[1])}</h3>`);
+        } else {
+          html.push(`<p>${renderInlineMarkdown(trimmed)}</p>`);
+        }
+      }
+      flushList();
+
+      return html.join("").replace(/@@MATH_BLOCK_(\d+)@@/g, (_, index) => blocks[Number(index)] || "");
+    }
+
+    function typesetMath() {
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([messagesEl]).catch((error) => {
+          console.warn("MathJax 渲染失败", error);
+        });
+      }
+    }
+
+    function sourceTypeLabel(sourceType) {
+      const labels = {
+        concept: "知识点",
+        problem: "题目",
+        course_content: "课程内容",
+        knowledge_graph: "知识图谱"
+      };
+      return labels[sourceType] || sourceType || "资料";
+    }
+
+    function renderCitations(citations = []) {
+      if (!citations.length) return "";
+      return `
+        <div class="citations">
+          <strong>参考资料</strong>
+          ${citations.map((citation, index) => `
+            <div class="citation">
+              <div class="citation-title">
+                ${index + 1}. ${escapeHtml(sourceTypeLabel(citation.source_type))}：${escapeHtml(citation.title || citation.source_id)}
+              </div>
+              <div class="citation-meta">
+                source_type=${escapeHtml(citation.source_type)} · source_id=${escapeHtml(citation.source_id)}
+              </div>
+              ${citation.snippet ? `<div class="citation-snippet">${renderMarkdown(citation.snippet)}</div>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function conversationTitle(conversation) {
+      return conversation.title || `对话 ${conversation.conversation_id.slice(-6)}`;
+    }
+
+    function renderConversations() {
+      currentConversationEl.textContent = currentConversationId
+        ? `后端接口：http://localhost:8000，当前对话：${currentConversationId}`
+        : "后端接口：http://localhost:8000，当前还没有对话";
+
+      if (!conversations.length) {
+        conversationListEl.innerHTML = '<div class="empty">暂无对话</div>';
+        return;
+      }
+
+      conversationListEl.innerHTML = conversations.map((conversation) => `
+        <button
+          class="conversation-item ${conversation.conversation_id === currentConversationId ? "active" : ""}"
+          type="button"
+          data-conversation-id="${escapeHtml(conversation.conversation_id)}"
+        >
+          ${escapeHtml(conversationTitle(conversation))}
+          <span class="conversation-count">${conversation.message_count} 条消息</span>
+        </button>
+      `).join("");
+
+      conversationListEl.querySelectorAll(".conversation-item").forEach((button) => {
+        button.addEventListener("click", async () => {
+          currentConversationId = button.dataset.conversationId;
+          localStorage.setItem("rag_current_conversation_id", currentConversationId);
+          renderConversations();
+          await loadHistory();
+        });
+      });
+    }
+
+    function renderMessages(messages) {
+      if (!messages.length) {
+        messagesEl.innerHTML = '<div class="empty">输入一个高数问题，点击发送。</div>';
+        return;
+      }
+
+      messagesEl.innerHTML = messages.map((message) => {
+        const role = message.role === "user" ? "user" : "assistant";
+        const label = role === "user" ? "我" : "助手";
+        const body = role === "user" ? escapeHtml(message.content) : renderMarkdown(message.content);
+        return `
+          <div class="message ${role}">
+            <div class="bubble"><p><strong>${label}：</strong></p>${body}${renderCitations(message.citations)}</div>
+          </div>
+        `;
+      }).join("");
+      typesetMath();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+
+    function appendStreamingAssistant() {
+      const wrapper = document.createElement("div");
+      wrapper.className = "message assistant";
+      wrapper.innerHTML = '<div class="bubble"><p><strong>助手：</strong></p><div id="streamingContent"></div><div id="streamingCitations"></div></div>';
+      messagesEl.appendChild(wrapper);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+      return {
+        contentEl: wrapper.querySelector("#streamingContent"),
+        citationsEl: wrapper.querySelector("#streamingCitations")
+      };
+    }
+
+    async function loadHistory() {
+      if (!currentConversationId) {
+        renderMessages([]);
+        return;
+      }
+
+      const res = await fetch(`${API_BASE}/conversations/${currentConversationId}/messages?limit=50&offset=0`);
+      if (!res.ok) {
+        throw new Error("历史消息加载失败");
+      }
+      renderMessages(await res.json());
+    }
+
+    async function sendQuestion(content) {
+      await ensureConversation();
+
+      const res = await fetch(`${API_BASE}/conversations/${currentConversationId}/messages/stream`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content,
+          retrieval: {
+            limit: 5
+          }
+        })
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.detail || "发送失败");
+      }
+
+      await readStreamResponse(res);
+      await loadConversations();
+    }
+
+    async function readStreamResponse(res) {
+      if (!res.body) {
+        throw new Error("当前浏览器不支持流式读取");
+      }
+
+      const { contentEl, citationsEl } = appendStreamingAssistant();
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      let answer = "";
+      let citations = [];
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        const events = buffer.split("\n\n");
+        buffer = events.pop() || "";
+
+        for (const rawEvent of events) {
+          const parsed = parseSseEvent(rawEvent);
+          if (!parsed) continue;
+
+          if (parsed.event === "message") {
+            answer += parsed.data.content || "";
+            contentEl.innerHTML = renderMarkdown(answer);
+            typesetMath();
+            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          } else if (parsed.event === "citations") {
+            citations = parsed.data.citations || [];
+            citationsEl.innerHTML = renderCitations(citations);
+            typesetMath();
+          } else if (parsed.event === "error") {
+            throw new Error(parsed.data.detail || "流式生成失败");
+          }
+        }
+      }
+    }
+
+    function parseSseEvent(rawEvent) {
+      const lines = rawEvent.split("\n");
+      const eventLine = lines.find((line) => line.startsWith("event:"));
+      const dataLines = lines.filter((line) => line.startsWith("data:"));
+      if (!eventLine || !dataLines.length) return null;
+
+      const event = eventLine.slice("event:".length).trim();
+      const dataText = dataLines.map((line) => line.slice("data:".length).trim()).join("\n");
+      try {
+        return { event, data: JSON.parse(dataText) };
+      } catch {
+        return { event, data: {} };
+      }
+    }
+
+    async function loadConversations() {
+      const res = await fetch(`${API_BASE}/conversations?limit=50&offset=0`);
+      if (!res.ok) {
+        throw new Error("对话列表加载失败");
+      }
+
+      conversations = await res.json();
+      if (currentConversationId && !conversations.some((item) => item.conversation_id === currentConversationId)) {
+        currentConversationId = "";
+        localStorage.removeItem("rag_current_conversation_id");
+      }
+      if (!currentConversationId && conversations.length) {
+        currentConversationId = conversations[0].conversation_id;
+        localStorage.setItem("rag_current_conversation_id", currentConversationId);
+      }
+      renderConversations();
+    }
+
+    async function createConversation(title = "") {
+      const res = await fetch(`${API_BASE}/conversations`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ title })
+      });
+      if (!res.ok) {
+        throw new Error("新建对话失败");
+      }
+
+      const conversation = await res.json();
+      currentConversationId = conversation.conversation_id;
+      localStorage.setItem("rag_current_conversation_id", currentConversationId);
+      await loadConversations();
+      await loadHistory();
+    }
+
+    async function ensureConversation() {
+      if (currentConversationId) return;
+      await createConversation();
+    }
+
+    newChatEl.addEventListener("click", async () => {
+      errorEl.textContent = "";
+      try {
+        await createConversation();
+        questionEl.focus();
+      } catch (error) {
+        errorEl.textContent = error.message;
+      }
+    });
+
+    formEl.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const content = questionEl.value.trim();
+      if (!content) return;
+
+      errorEl.textContent = "";
+      sendEl.disabled = true;
+      sendEl.textContent = "生成中";
+
+      const optimisticMessages = [
+        ...Array.from(messagesEl.querySelectorAll(".message")).map((el) => ({
+          role: el.classList.contains("user") ? "user" : "assistant",
+          content: el.querySelector(".bubble").textContent.replace(/^我：|^助手：/, ""),
+          citations: []
+        })),
+        { role: "user", content, citations: [] }
+      ];
+      renderMessages(optimisticMessages);
+      questionEl.value = "";
+
+      try {
+        await ensureConversation();
+        await sendQuestion(content);
+      } catch (error) {
+        errorEl.textContent = error.message;
+        await loadHistory().catch(() => {});
+      } finally {
+        sendEl.disabled = false;
+        sendEl.textContent = "发送";
+        questionEl.focus();
+      }
+    });
+
+    async function boot() {
+      await loadConversations();
+      await loadHistory();
+    }
+
+    boot().catch((error) => {
+      errorEl.textContent = error.message;
+    });
+  </script>
+</body>
+</html>
