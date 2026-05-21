@@ -39,18 +39,19 @@ def setup_database(md_file_path: str):
 # ==========================================
 # 2：生成模型初始化
 # ==========================================
-def init_llm(model_name: str = "glm-4", temperature: float = 0.1):
+def init_llm(model_name: str = None, temperature: float = None):
     """
     初始化用于生成回答的大模型。
     """
-    zhipu_api_key = os.getenv("ZHIPU_API_KEY")
-    if not zhipu_api_key:
-        raise ValueError("请在 .env 文件中设置 ZHIPU_API_KEY")
+    model_name = model_name or Config.LLM_MODEL_NAME
+    temperature = Config.LLM_TEMPERATURE if temperature is None else temperature
+    if not Config.LLM_API_KEY:
+        raise ValueError("请在 .env 文件中设置 QWEN_API_KEY 或 DASHSCOPE_API_KEY")
 
     llm = ChatOpenAI(
         model=model_name,
-        api_key=zhipu_api_key,
-        base_url="https://open.bigmodel.cn/api/paas/v4/", 
+        api_key=Config.LLM_API_KEY,
+        base_url=Config.LLM_BASE_URL,
         temperature=temperature, 
         max_tokens=2048
     )
@@ -111,6 +112,17 @@ def smart_retrieve(query: str, retriever_engine: MathRetriever) -> list:
 # ==========================================
 def generate_math_answer(query: str, retrieved_docs: list, llm) -> str:
     """接收用户问题和检索到的文档，生成最终解答。"""
+    if not retrieved_docs:
+        return "根据现有知识库，无法准确解答。"
+
+    prompt_template, payload = build_math_answer_prompt(query, retrieved_docs)
+    chain = prompt_template | llm | StrOutputParser()
+    print("大模型推理中...")
+    return chain.invoke(payload)
+
+
+def build_math_answer_prompt(query: str, retrieved_docs: list):
+    """构建数学问答 prompt，供同步和流式生成共同复用。"""
     context_text = ""
     for i, doc in enumerate(retrieved_docs):
         source_info = doc.metadata if hasattr(doc, 'metadata') else "未知"
@@ -132,10 +144,7 @@ def generate_math_answer(query: str, retrieved_docs: list, llm) -> str:
         ("system", system_prompt),
         ("human", "用户提问：{query}\n请给出你的解答：")
     ])
-
-    chain = prompt_template | llm | StrOutputParser()
-    print("大模型推理中...")
-    return chain.invoke({"context": context_text, "query": query})
+    return prompt_template, {"context": context_text, "query": query}
 
 
 # ==========================================
