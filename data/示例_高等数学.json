@@ -1,0 +1,107 @@
+[
+  {
+    "Chapter": "第一章 极限与连续",
+    "Section": "1.1 数列极限",
+    "Topic": "定义",
+    "Sub_Topic": "",
+    "content": "设 $a_n$为数列，$A$为常数。若对任意$\\varepsilon > 0$，存在正整数$N$，使得当$n > N$时，有：$$|a_n - A| < \\varepsilon$$则称数列$a_n$收敛于$A$，记作$\\lim_{n \\to \\infty} a_n = A$。"
+  },
+  {
+    "Chapter": "第一章 极限与连续",
+    "Section": "1.1 数列极限",
+    "Topic": "重要性质",
+    "Sub_Topic": "",
+    "content": "数列极限有以下基本性质：- **唯一性**：若数列极限存在，则极限唯一。- **有界性**：收敛数列必有界。- **保号性**：若$\\lim a_n = A > 0$，则存在$N$，当$n > N$时$a_n > 0$。"
+  },
+  {
+    "Chapter": "第一章 极限与连续",
+    "Section": "1.1 数列极限",
+    "Topic": "例题",
+    "Sub_Topic": "",
+    "content": "**例1**：证明$\\lim_{n \\to \\infty} \\frac{1}{n} = 0$**证明**：对任意$\\varepsilon > 0$，取$N = \\lceil \\frac{1}{\\varepsilon} \\rceil$，当$n > N$时：$$\\left|\\frac{1}{n} - 0\\right| = \\frac{1}{n} < \\frac{1}{N} \\leq \\varepsilon$$故$\\lim_{n \\to \\infty} \\frac{1}{n} = 0$。"
+  },
+  {
+    "Chapter": "第一章 极限与连续",
+    "Section": "1.2 函数极限",
+    "Topic": "定义",
+    "Sub_Topic": "",
+    "content": "设函数$f(x)$在点$x_0$的某去心邻域内有定义。若对任意$\\varepsilon > 0$，存在$\\delta > 0$，使得当$0 < |x - x_0| < \\delta$时：$$|f(x) - A| < \\varepsilon$$则称$A$为$f(x)$当$x \\to x_0$时的极限，记作$\\lim_{x \\to x_0} f(x) = A$。"
+  },
+  {
+    "Chapter": "第一章 极限与连续",
+    "Section": "1.2 函数极限",
+    "Topic": "两个重要极限",
+    "Sub_Topic": "",
+    "content": "两个重要极限：$$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$$$\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$$"
+  },
+  {
+    "Chapter": "第一章 极限与连续",
+    "Section": "1.3 连续性",
+    "Topic": "定义",
+    "Sub_Topic": "",
+    "content": "若$\\lim_{x \\to x_0} f(x) = f(x_0)$，则称函数$f(x)$在点$x_0$处**连续**。"
+  },
+  {
+    "Chapter": "第二章 导数与微分",
+    "Section": "2.1 导数的定义",
+    "Topic": "定义",
+    "Sub_Topic": "",
+    "content": "设函数$f(x)$在点$x_0$的某邻域内有定义，若极限：$$f'(x_0) = \\lim_{\\Delta x \\to 0} \\frac{f(x_0 + \\Delta x) - f(x_0)}{\\Delta x}$$存在，则称$f(x)$在$x_0$处**可导**，该极限值称为$f(x)$在$x_0$处的**导数**。"
+  },
+  {
+    "Chapter": "第二章 导数与微分",
+    "Section": "2.1 导数的定义",
+    "Topic": "几何意义",
+    "Sub_Topic": "",
+    "content": "导数$f'(x_0)$表示曲线$y = f(x)$在点$(x_0, f(x_0))$处**切线的斜率**。切线方程为：$$y - f(x_0) = f'(x_0)(x - x_0)$$法线方程为（当$f'(x_0) \\neq 0$时）：$$y - f(x_0) = -\\frac{1}{f'(x_0)}(x - x_0)$$"
+  },
+  {
+    "Chapter": "第二章 导数与微分",
+    "Section": "2.2 基本求导公式",
+    "Topic": "常用公式表",
+    "Sub_Topic": "",
+    "content": "函数求导公式表：| 函数 | 导数 ||------|------|| C（常数） | 0 || x^n | nx^{n-1} || sin x | cos x || cos x | -sin x || e^x | e^x || ln x | 1/x || tan x | sec^2 x |"
+  },
+  {
+    "Chapter": "第二章 导数与微分",
+    "Section": "2.2 基本求导公式",
+    "Topic": "求导法则",
+    "Sub_Topic": "",
+    "content": "- **和差法则**：$(u \\pm v)' = u' \\pm v'$- **积法则**：$(uv)' = u'v + uv'$- **商法则**：$\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}$- **链式法则**：$[f(g(x))]' = f'(g(x)) \\cdot g'(x)$"
+  },
+  {
+    "Chapter": "第二章 导数与微分",
+    "Section": "2.2 基本求导公式",
+    "Topic": "例题",
+    "Sub_Topic": "",
+    "content": "**例2**：求$y = x^3 \\sin x$的导数**解**：由积法则：$$y' = (x^3)' \\sin x + x^3 (\\sin x)' = 3x^2 \\sin x + x^3 \\cos x$$"
+  },
+  {
+    "Chapter": "第三章 积分",
+    "Section": "3.1 不定积分",
+    "Topic": "定义",
+    "Sub_Topic": "",
+    "content": "若$F'(x) = f(x)$，则$F(x)$称为$f(x)$的一个**原函数**。$f(x)$的所有原函数的集合称为**不定积分**，记作：$$\\int f(x)\\,dx = F(x) + C$$"
+  },
+  {
+    "Chapter": "第三章 积分",
+    "Section": "3.2 定积分",
+    "Topic": "定义",
+    "Sub_Topic": "",
+    "content": "设$f(x)$在$[a, b]$上有界，将区间$[a,b]$分成$n$个小区间，作和式：$$S_n = \\sum_{i=1}^n f(\\xi_i)\\Delta x_i$$若当各小区间长度趋于0时，$S_n$趋于确定的极限$I$，则称$I$为$f(x)$在$[a,b]$上的**定积分**：$$\\int_a^b f(x)\\,dx = I$$"
+  },
+  {
+    "Chapter": "第三章 积分",
+    "Section": "3.2 定积分",
+    "Topic": "牛顿-莱布尼茨公式",
+    "Sub_Topic": "",
+    "content": "若$F(x)$是$f(x)$在$[a, b]$上的原函数，则：$$\\int_a^b f(x)\\,dx = F(b) - F(a) = \\left[F(x)\\right]_a^b$$"
+  },
+  {
+    "Chapter": "第三章 积分",
+    "Section": "3.2 定积分",
+    "Topic": "例题",
+    "Sub_Topic": "",
+    "content": "**例3**：计算$\\int_0^1 x^2\\,dx$**解**：由牛顿-莱布尼茨公式：$$\\int_0^1 x^2\\,dx = \\left[\\frac{x^3}{3}\\right]_0^1 = \\frac{1}{3} - 0 = \\frac{1}{3}$$"
+  }
+]

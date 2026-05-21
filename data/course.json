@@ -1,0 +1,319 @@
+{
+  "course": {
+    "key": "advanced_math_intro",
+    "title": "高等数学",
+    "graph_key": "advanced_math",
+    "summary": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "本课程基于现有知识点体系，整理出一条清晰的高等数学学习推进方案。课程内容围绕极限、连续性、导数、微分、中值定理、积分与多元函数逐步展开，强调知识点之间的前后承接关系。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "bulleted_list_item",
+        "content": [
+          {
+            "type": "text",
+            "text": "课程重点不在于一次铺开全部章节，而在于把核心知识点与关键子知识点组织成一条可持续推进的学习路径。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "bulleted_list_item",
+        "content": [
+          {
+            "type": "text",
+            "text": "学习过程中会配合关键知识点引用与典型题目，帮助读者在概念理解、结构梳理与练习应用之间形成稳定连接。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      }
+    ],
+    "content": [
+      {
+        "type": "heading",
+        "level": 2,
+        "content": [
+          {
+            "type": "text",
+            "text": "课程推进方案",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "课程建议按“极限语言 -> 连续与导数 -> 微分与中值定理 -> 积分主线 -> 多元推广”这一顺序推进。每一阶段都先建立概念理解，再进入相邻知识点之间的连接与应用。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "numbered_list_item",
+        "number": 1,
+        "content": [
+          {
+            "type": "text",
+            "text": "先建立极限相关语言，明确“趋近”“存在”“计算”和“判定”这几件事分别在处理什么问题。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-limit",
+        "label": "极限"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-function-limit",
+        "label": "函数极限"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-one-sided-limit",
+        "label": "左右极限"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-limit-laws",
+        "label": "极限运算法则"
+      },
+      {
+        "type": "numbered_list_item",
+        "number": 2,
+        "content": [
+          {
+            "type": "text",
+            "text": "再进入连续性与导数，理解函数在一点附近是否接得上，以及局部变化率是如何定义出来的。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-point-continuity",
+        "label": "一点连续"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-discontinuity",
+        "label": "间断点"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-derivative-definition",
+        "label": "导数定义"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-differentiation-rules",
+        "label": "基本求导法则"
+      },
+      {
+        "type": "numbered_list_item",
+        "number": 3,
+        "content": [
+          {
+            "type": "text",
+            "text": "在导数基础上继续推进到微分与中值定理，把局部线性近似与整体变化控制连接起来。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-linear-approximation",
+        "label": "线性近似"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-lagrange-mean-value-theorem",
+        "label": "拉格朗日中值定理"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-lhopital-rule",
+        "label": "洛必达法则"
+      },
+      {
+        "type": "numbered_list_item",
+        "number": 4,
+        "content": [
+          {
+            "type": "text",
+            "text": "随后进入积分主线，从原函数与积分方法过渡到累计观点，再回到定积分的结构与应用。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-antiderivative-and-indefinite-integral",
+        "label": "原函数与不定积分"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-substitution-integration",
+        "label": "换元积分法"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-newton-leibniz-formula",
+        "label": "牛顿-莱布尼茨公式"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-applications-of-definite-integral",
+        "label": "定积分应用"
+      },
+      {
+        "type": "numbered_list_item",
+        "number": 5,
+        "content": [
+          {
+            "type": "text",
+            "text": "最后把一元函数中的极限、连续、导数与微分思想推广到多元情形，形成更完整的视角。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-multivariable",
+        "label": "多元函数"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-two-variable-limit",
+        "label": "二元函数极限"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-partial-derivative",
+        "label": "偏导数"
+      },
+      {
+        "type": "ref_card",
+        "link_type": "concept",
+        "id": "concept-ref-directional-derivative-and-gradient",
+        "label": "方向导数与梯度"
+      },
+      {
+        "type": "callout",
+        "icon": null,
+        "content": [
+          {
+            "type": "text",
+            "text": "课程内容并非按章节简单堆叠，而是按照知识点之间的依赖关系与理解难度重新组织推进顺序，以保证学习过程更连贯。",
+            "annotations": {
+              "bold": false,
+              "italic": false,
+              "underline": false,
+              "strikethrough": false,
+              "code": false,
+              "color": "default"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

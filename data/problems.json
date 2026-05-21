@@ -1,0 +1,510 @@
+{
+  "problems": [
+    {
+      "key": "limit_sinx_over_x",
+      "title": "重要极限：lim(x→0) sin(x)/x",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：计算下列重要极限，并说明结果的几何意义。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\lim_{x \\to 0} \\frac{\\sin x}{x}"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "切入点：先判断直接代入是否有效；若无效，再观察是否可以借助夹逼或熟悉的标准结构。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-function-limit", "label": "函数极限"}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "极限值为 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "1"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题的关键不在于记忆结果，而在于识别直接代入无效后，应转向夹逼思路。利用单位圆中的几何不等式，在 0 < x < π/2 时有", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\sin x < x < \\tan x"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "各项除以 sin x，得：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\cos x < \\frac{\\sin x}{x} < 1"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "由于 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\lim_{x \\to 0} \\cos x = 1"},
+          {"type": "text", "text": "，由夹逼定理得结论。相关概念可回看", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "link", "link_type": "concept", "id": "concept-ref-limit", "label": "极限", "nav_mode": "detail"},
+          {"type": "text", "text": "。x < 0 时令 t = -x 同理可得。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题更重要的收获，是建立如下判断习惯：当目标式能够夹在两个更易求极限的表达式之间时，应优先考虑夹逼定理。这类方法意识比单独记忆某个重要极限更有价值。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "几何意义：小角度时弦长 sin x 与弧长 x 之比趋近于 1，即两者近似相等。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+        ,
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "自检步骤：把结果改写为 lim(x→0) x/sin x = 1 再验证一次，检查推导是否双向一致。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["极限", "重要极限", "基础"],
+      "concepts": ["limit", "function_limit"]
+    },
+    {
+      "key": "limit_lhopital",
+      "title": "洛必达法则：lim(x→0) (eˣ - 1 - x) / x²",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：用洛必达法则计算该极限，并明确说明适用条件是否满足。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\lim_{x \\to 0} \\frac{e^x - 1 - x}{x^2}"},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-lhopital-rule", "label": "洛必达法则"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "洛必达法则适用条件：分子分母同趋于 0（0/0 型）或同趋于 ∞（∞/∞ 型）。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "极限值为 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\dfrac{1}{2}"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "先判型再谈方法。x→0 时分子分母均趋于 0，为 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\frac{0}{0}"},
+          {"type": "text", "text": " 型，满足洛必达法则条件。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "第一次使用洛必达法则：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\lim_{x \\to 0} \\frac{e^x - 1}{2x}"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "仍为 0/0 型，再次使用：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\lim_{x \\to 0} \\frac{e^x}{2} = \\frac{1}{2}"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "验证（泰勒展开）：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "e^x = 1 + x + \\frac{x^2}{2} + O(x^3)"},
+          {"type": "text", "text": "，故分子 ≈ x²/2，结论一致。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "易错点：若第一次洛必达后仍是 0/0 型，必须再次判型后再用，不能直接代入。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["极限", "洛必达法则", "中等"],
+      "concepts": ["limit", "derivative", "mean_value_theorem", "lhopital_rule"]
+    },
+    {
+      "key": "continuity_ivt",
+      "title": "介值定理：证明 x³ - 2x - 1 = 0 在 (1,2) 内有根",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：已知函数 f(x) = x³ - 2x - 1，利用介值定理证明方程在区间 (1,2) 内至少有一个实根。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(x) = x^3 - 2x - 1 = 0, \\quad x \\in (1, 2)"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "介值定理：若 f 在 [a,b] 上连续，且 f(a) 与 f(b) 异号，则存在 c∈(a,b) 使 f(c) = 0。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "由介值定理，方程 f(x) = 0 在 (1,2) 内至少有一个实根。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "这类存在性问题通常遵循统一步骤：先证明函数连续，再检查端点函数值符号。由于 f(x) = x³ - 2x - 1 是多项式函数，它在整个实数域上连续，因此在 [1,2] 上连续。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "计算端点函数值：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(1) = 1 - 2 - 1 = -2 < 0"},
+        {"type": "equation_block", "latex": "f(2) = 8 - 4 - 1 = 3 > 0"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "由于 f(1) < 0 且 f(2) > 0，f 在 [1,2] 上连续，由介值定理知存在 c ∈ (1,2) 使 f(c) = 0，即方程在 (1,2) 内有根。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题最常见的疏漏，是只写端点异号而忽略连续性前提。介值定理要求“连续且异号”同时成立，因此书写时应先说明连续，再说明异号，最后给出结论。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-continuity", "label": "连续性"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "书写建议：先写“多项式在闭区间连续”，再写“端点异号”，最后引用介值定理结论。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["连续性", "介值定理", "中等"],
+      "concepts": ["continuity", "continuity_properties"]
+    },
+    {
+      "key": "derivative_extremum",
+      "title": "求函数的极值：f(x) = x³ - 3x² + 4",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：利用导数判别函数极值，并写出极值点与极值。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(x) = x^3 - 3x^2 + 4"},
+        {"type": "numbered_list_item", "number": 1, "content": [{"type": "text", "text": "求导数 f′(x)；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 2, "content": [{"type": "text", "text": "找出所有极值点，判断极大值还是极小值；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 3, "content": [{"type": "text", "text": "求各极值。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：先找驻点，再观察导数在驻点两侧是否变号。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-derivative", "label": "导数"}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "极大值点 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "x=0"},
+          {"type": "text", "text": "，极大值 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "f(0)=4"},
+          {"type": "text", "text": "；极小值点 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "x=2"},
+          {"type": "text", "text": "，极小值 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "f(2)=0"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "求极值时不能只停留在“令导数等于 0”这一步。极值类型最终由导数在驻点两侧的符号变化决定，因此先求导：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f'(x) = 3x^2 - 6x = 3x(x-2)"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "（2）令 f′(x) = 0，驻点为 x = 0 和 x = 2。用第一导数符号判别：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "bulleted_list_item", "content": [{"type": "text", "text": "x < 0：f′(x) > 0；0 < x < 2：f′(x) < 0 → x = 0 是极大值点", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "bulleted_list_item", "content": [{"type": "text", "text": "x > 2：f′(x) > 0 → x = 2 是极小值点", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "这里需要重点关注的是导数符号是否发生“正变负”或“负变正”。驻点只是极值候选点，是否确为极值，还需结合两侧变化趋势作进一步判断。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "（3）代入计算：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(0) = 4 \\quad f(2) = 8 - 12 + 4 = 0"},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "自检点：不要把“求出驻点”误当作“已经判定极值”。极值判别仍需结合导数符号变化完成。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "tags": ["导数", "极值", "中等"],
+      "concepts": ["derivative"]
+    },
+    {
+      "key": "derivative_chain_rule",
+      "title": "链式法则：求 f(x) = ln(sin(x²)) 的导数",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：利用链式法则求复合函数导数，并写清复合层次。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(x) = \\ln(\\sin(x^2))"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "请写出复合结构的分解过程。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：先找最外层函数，再向内逐层拆分，最后从外到内连乘。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-differentiation-rules", "label": "基本求导法则"}
+      ],
+      "answer": [
+        {"type": "equation_block", "latex": "f'(x) = 2x \\cdot \\cot(x^2)"}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "三层复合分解：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "bulleted_list_item", "content": [{"type": "text", "text": "最外层：u → ln u，导数 1/u", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "bulleted_list_item", "content": [{"type": "text", "text": "中间层：v → sin v，导数 cos v", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "bulleted_list_item", "content": [{"type": "text", "text": "最内层：x → x²，导数 2x", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题需要把握的重点是复合层次的识别，而不是机械记忆“链式法则”这一名称。层次拆分正确后，求导过程就是把各层导数按从外到内的顺序连乘：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f'(x) = \\frac{1}{\\sin(x^2)} \\cdot \\cos(x^2) \\cdot 2x = 2x \\cot(x^2)"},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "定义域限制：需要 sin(x²) > 0 才能取 ln，因此定义域不是整个实数轴。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "tags": ["导数", "链式法则", "中等"],
+      "concepts": ["derivative", "differentiation_rules"]
+    },
+    {
+      "key": "differential_approximation",
+      "title": "微分近似：估算 √1.02 的近似值",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：利用微分做线性近似估算，并写出所用近似公式。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\sqrt{1.02} \\approx ?"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "微分近似公式：f(x₀ + Δx) ≈ f(x₀) + f'(x₀)·Δx，要求 |Δx| 很小。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-applications-of-differential-in-approximation", "label": "微分在近似计算中的应用"}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "近似值为 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "1.01"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "令 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "f(x) = \\sqrt{x}"},
+          {"type": "text", "text": "，取 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "x_0 = 1"},
+          {"type": "text", "text": "，因为 1 附近最好算，且 1.02 离它足够近，", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\Delta x = 0.02"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "f'(x) = \\frac{1}{2\\sqrt{x}}, \\quad f'(1) = \\frac{1}{2}"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "代入微分近似公式：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\sqrt{1.02} \\approx f(1) + f'(1) \\cdot 0.02 = 1 + \\frac{1}{2} \\times 0.02 = 1.01"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "这里选择 x₀ = 1，并不仅仅因为计算方便，更因为 1.02 与基准点足够接近。微分近似依赖局部线性化，因此离基准点越近，近似通常越可靠。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "精确值 √1.02 ≈ 1.00995，误差约 0.005%，线性近似效果良好。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["微分", "近似计算", "基础"],
+      "concepts": ["differential", "derivative", "linear_approximation", "applications_of_differential_in_approximation"]
+    },
+    {
+      "key": "mean_value_lagrange",
+      "title": "拉格朗日定理：证明不等式 |sin a - sin b| ≤ |a - b|",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：对任意实数 a, b，利用拉格朗日中值定理证明下列不等式。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "|\\sin a - \\sin b| \\leq |a - b|"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "拉格朗日中值定理：若 f 在 [a,b] 连续，在 (a,b) 可导，则存在 ξ∈(a,b) 使 f(b)-f(a) = f'(ξ)(b-a)。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-lagrange-mean-value-theorem", "label": "拉格朗日中值定理"}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "利用拉格朗日定理得 |sin a - sin b| = |cos ξ|·|a-b| ≤ |a-b|，证毕。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "当 a = b 时不等式显然成立（两端均为 0）。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "当 a ≠ b 时，证明思路是把函数差值改写成“某点导数乘区间长度”的形式。令 f(x) = sin x，在以 a, b 为端点的闭区间上应用拉格朗日中值定理：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "\\sin a - \\sin b = \\cos \\xi \\cdot (a - b), \\quad \\xi \\text{ 介于 } a \\text{ 与 } b \\text{ 之间}"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "两端取绝对值，并利用 |cos ξ| ≤ 1：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "|\\sin a - \\sin b| = |\\cos \\xi| \\cdot |a - b| \\leq 1 \\cdot |a - b| = |a - b|"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "这一步的核心，在于把原本不易直接比较的函数差，转化为“导数上界乘区间长度”。遇到类似差值不等式时，也应优先考虑是否能够沿这一思路改写。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "此不等式表明 sin x 满足 Lipschitz 条件（常数 L=1），是一致连续的。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-mean-value-theorem", "label": "中值定理"}
+      ],
+      "tags": ["中值定理", "不等式", "中等"],
+      "concepts": ["mean_value_theorem", "derivative", "lagrange_mean_value_theorem"]
+    },
+    {
+      "key": "indefinite_integral_by_parts",
+      "title": "分部积分法：求 ∫x·eˣ dx",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：用分部积分法求下列不定积分。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\int x \\cdot e^x \\, dx"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "写出分部积分公式和完整计算过程。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：优先让求导后更简单的部分做 u，让容易积分的部分做 dv。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-integration-by-parts", "label": "分部积分法"}
+      ],
+      "answer": [
+        {"type": "equation_block", "latex": "\\int x e^x \\, dx = (x-1)e^x + C"}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "分部积分公式：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\int u \\, dv = uv - \\int v \\, du"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "本题取 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "u = x"},
+          {"type": "text", "text": "，是因为它求导后会更简单；取", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "dv = e^x dx"},
+          {"type": "text", "text": "，则 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "du = dx"},
+          {"type": "text", "text": "，", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "v = e^x"},
+          {"type": "text", "text": "。代入：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "\\int x e^x dx = x e^x - \\int e^x dx = x e^x - e^x + C = (x-1)e^x + C"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "验证：对结果求导，", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "[(x-1)e^x]' = e^x + (x-1)e^x = xe^x"},
+          {"type": "text", "text": "，与被积函数一致。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题更值得总结的是选取原则：哪一部分求导后更简单，通常就更适合作为 u。熟悉这一判断后，分部积分的处理会更加稳定。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "分部积分常见错误是选错 u 和 dv，导致结果更复杂。优先让求导后更简单的部分做 u。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "tags": ["不定积分", "分部积分", "中等"],
+      "concepts": ["indefinite_integral", "integration_by_parts"]
+    },
+    {
+      "key": "indefinite_integral_substitution",
+      "title": "换元积分法：求 ∫ sin(2x)/(1+cos²x) dx",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：通过换元把原式化成熟悉结构，再完成积分。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\int \\frac{\\sin 2x}{1 + \\cos^2 x} \\, dx"},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-substitution-integration", "label": "换元积分法"},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "提示：利用二倍角公式 sin 2x = 2 sin x cos x，并考虑令 t = cos²x 换元。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "answer": [
+        {"type": "equation_block", "latex": "\\int \\frac{\\sin 2x}{1+\\cos^2 x} \\, dx = -\\ln(1 + \\cos^2 x) + C"}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "本题适合采用换元法，是因为分母中含有 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "1+\\cos^2x"},
+          {"type": "text", "text": "，而分子展开后恰好接近其导数形式。由二倍角公式 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\sin 2x = 2\\sin x \\cos x"},
+          {"type": "text", "text": "，令 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "t = \\cos^2 x"},
+          {"type": "text", "text": "，则 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "dt = -2\\sin x \\cos x \\, dx"},
+          {"type": "text", "text": "，即分子 = -dt。代入：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "\\int \\frac{-dt}{1+t} = -\\ln|1+t| + C = -\\ln(1+\\cos^2 x) + C"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "易错点：换元后请同步替换积分元，出现 t 时应写 dt，最后再代回 x。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["不定积分", "换元法", "中等"],
+      "concepts": ["indefinite_integral", "differential", "substitution_integration"]
+    },
+    {
+      "key": "definite_integral_newton",
+      "title": "牛顿-莱布尼茨公式：计算 ∫₀^π sin x dx",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：利用牛顿-莱布尼茨公式计算定积分，并说明结果的几何意义。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\int_0^{\\pi} \\sin x \\, dx"},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：先找原函数，再代上下限，最后回看积分值与图形面积之间的对应。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-newton-leibniz-formula", "label": "牛顿-莱布尼茨公式"}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "定积分值为 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "2"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "本题计算过程较短，但重点在于把“原函数求值”和“面积解释”联系起来。sin x 的原函数为 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "F(x) = -\\cos x"},
+          {"type": "text", "text": "。由牛顿-莱布尼茨公式：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "\\int_0^{\\pi} \\sin x \\, dx = F(\\pi) - F(0) = (-\\cos\\pi) - (-\\cos 0) = 1 + 1 = 2"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "几何意义：该定积分等于正弦曲线在 [0, π] 上与 x 轴所围图形的面积（此区间 sin x ≥ 0，面积恰好等于积分值 2）。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题需要建立的认识是：定积分并不是简单的“带上下限的不定积分”，而是在计算区间上的累计结果。这里只是在特定区间内，累计结果恰好与几何面积一致。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "做完后建议反向检查：把区间改成 [0, 2π] 再算一次，体会“正负面积抵消”对定积分结果的影响。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "tags": ["定积分", "牛顿-莱布尼茨", "基础"],
+      "concepts": ["definite_integral", "indefinite_integral", "newton_leibniz_formula"]
+    },
+    {
+      "key": "definite_area",
+      "title": "定积分几何应用：求 y=x 与 y=x² 围成图形的面积",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：求由下列两条曲线围成的平面图形面积。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "y = x \\quad \\text{与} \\quad y = x^2"},
+        {"type": "numbered_list_item", "number": 1, "content": [{"type": "text", "text": "求两曲线的交点；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 2, "content": [{"type": "text", "text": "确定积分区间与被积函数（上方曲线减下方曲线）；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 3, "content": [{"type": "text", "text": "计算定积分。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：面积题先找交点，再判断上下边界，最后再写积分式。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-applications-of-definite-integral", "label": "定积分应用"}
+      ],
+      "answer": [
+        {"type": "equation_block", "latex": "S = \\frac{1}{6}"}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "（1）求交点：令 x = x²，得 x(x-1) = 0，交点为 (0,0) 和 (1,1)。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "（2）在 [0,1] 上 x ≥ x²，所以面积必须写成“上方曲线减下方曲线”。这一步是面积题最容易错的地方，先判断上下位置，再写积分式。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "S = \\int_0^1 (x - x^2)\\,dx"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "（3）计算：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "S = \\left[\\frac{x^2}{2} - \\frac{x^3}{3}\\right]_0^1 = \\frac{1}{2} - \\frac{1}{3} = \\frac{1}{6}"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "几何意义：直线 y=x 与抛物线 y=x² 在 [0,1] 上围成的月牙形区域面积为 1/6。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["定积分", "面积", "几何应用", "中等"],
+      "concepts": ["definite_integral", "indefinite_integral", "applications_of_definite_integral"]
+    },
+    {
+      "key": "ode_separable",
+      "title": "可分离变量方程：求解 dy/dx = 2xy",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：求可分离变量微分方程的通解。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\frac{dy}{dx} = 2xy"},
+        {"type": "numbered_list_item", "number": 1, "content": [{"type": "text", "text": "分离变量；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 2, "content": [{"type": "text", "text": "两端积分；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 3, "content": [{"type": "text", "text": "写出通解。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：先把 y 的项与 x 的项分到两边，再整体积分，最后把常数统一吸收。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "answer": [
+        {"type": "equation_block", "latex": "y = Ce^{x^2} \\quad (C \\text{ 为任意常数})"}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题之所以能够采用可分离变量法，是因为方程右端恰好写成了 x 的函数与 y 的函数的乘积形式，因此可以将 y 项移至左侧、x 项移至右侧。分离变量后（先假设 y ≠ 0）：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\frac{dy}{y} = 2x\\,dx"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "两端积分：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\int \\frac{dy}{y} = \\int 2x\\,dx \\implies \\ln|y| = x^2 + C_1"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "取指数化简：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "y = e^{x^2 + C_1} = C e^{x^2} \\quad (C = \\pm e^{C_1} \\neq 0)"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "这里需要特别注意：积分后的常数与取指数后的常数虽然写法不同，但本质上仍然表示同一族可能的解。如果在中间步骤中把常数固定为某个特定形式，就会缩小通解范围。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "y = 0 也满足方程（对应 C = 0），故通解为 y = Ce^(x²)，C 取任意实数。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["微分方程", "可分离变量", "中等"],
+      "concepts": ["differential_equation", "indefinite_integral"]
+    },
+    {
+      "key": "series_ratio_test",
+      "title": "比值法判敛：级数 Σ n²/3ⁿ 是否收敛",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：用比值法判断该正项级数的收敛性，并写出完整推导。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\sum_{n=1}^{\\infty} \\frac{n^2}{3^n}"},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-series", "label": "级数"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "比值法：若 lim(n→∞) aₙ₊₁/aₙ = L，则 L<1 时收敛，L>1 时发散，L=1 时无法判断。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "该级数收敛。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "本题适合使用比值法，因为通项具有“指数项乘多项式项”的典型结构。设通项 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "a_n = \\dfrac{n^2}{3^n}"},
+          {"type": "text", "text": "，计算相邻两项之比的极限：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "\\lim_{n \\to \\infty} \\frac{a_{n+1}}{a_n} = \\lim_{n \\to \\infty} \\frac{(n+1)^2}{3^{n+1}} \\cdot \\frac{3^n}{n^2} = \\lim_{n \\to \\infty} \\left(1+\\frac{1}{n}\\right)^2 \\cdot \\frac{1}{3} = \\frac{1}{3} < 1"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "由比值判别法，极限 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "L = \\frac{1}{3} < 1"},
+          {"type": "text", "text": "，故级数收敛。（指数函数 3ⁿ 的增长速度远快于多项式 n²。）", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "paragraph", "content": [{"type": "text", "text": "本题更值得总结的是判别经验：当通项中“指数压制多项式”的结构较为明显时，比值法通常十分有效。这里并非机械套用规则，而是由结构本身提示了合适的判别方法。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "自检步骤：若算得 L=1，则该法失效，应换根值法或比较法继续判别。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["级数", "比值法", "中等"],
+      "concepts": ["series"]
+    },
+    {
+      "key": "taylor_sinx",
+      "title": "泰勒展开：将 sin x 展开为麦克劳林级数",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：求 f(x) = sin x 在 x = 0 处的麦克劳林展开式，并给出前几项、通项公式与收敛域。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "麦克劳林级数是 x₀ = 0 处的泰勒级数，即 f(x) = Σ f^(n)(0)/n! · xⁿ。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "answer": [
+        {"type": "equation_block", "latex": "\\sin x = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}, \\quad x \\in (-\\infty, +\\infty)"}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "逐阶求 sin x 在 x=0 处的导数值：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(0)=0,\\; f'(0)=1,\\; f''(0)=0,\\; f'''(0)=-1,\\; f^{(4)}(0)=0,\\; \\ldots"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "在代入展开公式之前，应先观察各阶导数值的规律：偶数阶导数在 0 处均为 0，因此展开式中只保留奇数次幂项，且符号交替出现。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\sin x = x - \\frac{x^3}{6} + \\frac{x^5}{120} - \\frac{x^7}{5040} + \\cdots"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "利用比值法可验证级数在 (-∞, +∞) 上收敛，所以这个展开不是局部凑几项，而是对任意实数 x 都成立。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-series", "label": "级数"},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "易错点：奇数次幂符号交替，偶次幂系数为 0，不要漏写中间零项逻辑。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["级数", "泰勒展开", "麦克劳林", "中等"],
+      "concepts": ["series", "derivative"]
+    },
+    {
+      "key": "partial_gradient",
+      "title": "梯度与方向导数：f(x,y) = x² - xy + y²",
+      "content": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "例题目标：求偏导数、梯度，并计算指定方向上的方向导数。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "f(x, y) = x^2 - xy + y^2"},
+        {"type": "numbered_list_item", "number": 1, "content": [{"type": "text", "text": "求偏导数 ∂f/∂x 和 ∂f/∂y；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 2, "content": [{"type": "text", "text": "写出梯度向量 ∇f；", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "numbered_list_item", "number": 3, "content": [{"type": "text", "text": "求点 (1,1) 处沿方向 l = (1/√2, 1/√2) 的方向导数。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [{"type": "text", "text": "切入点：先求偏导数，再写梯度，最后与单位方向向量做点积。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "ref_card", "link_type": "concept", "id": "concept-ref-directional-derivative-and-gradient", "label": "方向导数与梯度"}
+      ],
+      "answer": [
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "∇f = (2x-y, 2y-x)；在 (1,1) 处 ∇f = (1,1)；方向导数 = ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\sqrt{2}"},
+          {"type": "text", "text": "。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "solution": [
+        {"type": "paragraph", "content": [{"type": "text", "text": "处理本题时，建议把“偏导数 -> 梯度 -> 方向导数”视为一条连续的计算链。先分析各坐标方向上的变化，再组成梯度，最后投影到指定方向。首先求偏导数：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\frac{\\partial f}{\\partial x} = 2x - y, \\quad \\frac{\\partial f}{\\partial y} = 2y - x"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "（2）梯度向量：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\nabla f = (2x-y,\\; 2y-x)"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "（3）在点 (1,1) 处：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "equation_block", "latex": "\\nabla f|_{(1,1)} = (2\\cdot1-1,\\; 2\\cdot1-1) = (1, 1)"},
+        {"type": "paragraph", "content": [
+          {"type": "text", "text": "方向 ", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}},
+          {"type": "equation", "latex": "\\boldsymbol{l} = \\left(\\tfrac{1}{\\sqrt{2}},\\, \\tfrac{1}{\\sqrt{2}}\\right)"},
+          {"type": "text", "text": " 已经是单位向量，所以可以直接做点积求方向导数：", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]},
+        {"type": "equation_block", "latex": "\\frac{\\partial f}{\\partial l}\\bigg|_{(1,1)} = \\nabla f \\cdot \\boldsymbol{l} = 1 \\cdot \\frac{1}{\\sqrt{2}} + 1 \\cdot \\frac{1}{\\sqrt{2}} = \\sqrt{2}"},
+        {"type": "paragraph", "content": [{"type": "text", "text": "这里需要形成的认识是：方向导数并不是另一套独立的求导规则，而是在回答“沿指定方向，函数值增长速度有多大”这一问题。点积只是将这一问题计算化表达出来。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}]},
+        {"type": "callout", "icon": null, "content": [
+          {"type": "text", "text": "方向导数最大值等于梯度模长 |∇f| = √2，方向即梯度方向 (1,1)/√2。", "annotations": {"bold": false, "italic": false, "underline": false, "strikethrough": false, "code": false, "color": "default"}}
+        ]}
+      ],
+      "tags": ["偏导数", "梯度", "方向导数", "中等"],
+      "concepts": ["partial_derivative", "directional_derivative_and_gradient", "multivariable"]
+    }
+  ]
+}
