@@ -1,93 +1,112 @@
-# RAG-Study — 高等数学 RAG 问答系统
+RAG科研训练
 
-> 南京理工大学 RAG 科研训练项目
-> 基于 LangChain + 智谱 GLM-4 + ChromaDB 构建的本地知识库问答系统
+## 问答接口
 
----
+本项目现在提供一层 FastAPI 问答接口，并预留 Temporal workflow/activity 编排。
 
-## 📁 项目结构
+### 1. 安装依赖
 
-```
-RAG-Study/
-├── config.py           # 全局配置（模型、路径、参数）
-├── rag_split.py        # 文档解析与向量库构建
-├── rag_retrieve.py     # 两阶段检索（向量召回 + 重排序）
-├── rag_generate.py     # 主程序：意图路由 + 生成回答
-├── rag_agent.py        # 查询意图分析（总结/例题/问答）
-├── install.py          # 一键安装依赖脚本
-├── .env                # API 密钥配置（不要上传 GitHub！）
-└── data/               # 放你的 Markdown 笔记文件
-    └── 示例_高等数学.md
+```bash
+pip install -r requirements.txt
 ```
 
----
+`.env` 至少需要配置千问 API Key，二选一即可：
 
-## 🚀 快速开始
-
-### 第一步：安装依赖
-
-```powershell
-cd RAG-Study
-python install.py
+```bash
+QWEN_API_KEY=你的阿里云百炼APIKey
+# 或
+DASHSCOPE_API_KEY=你的阿里云百炼APIKey
 ```
 
-### 第二步：配置 API Key
+可选配置：
 
-编辑 `.env` 文件，填入你的**智谱 API Key**：
-
-```
-ZHIPU_API_KEY=你的密钥（去 https://open.bigmodel.cn 申请）
-```
-
-### 第三步：放入你的笔记
-
-把你的 Markdown 格式笔记（如高数、线代等）放入 `data/` 目录。
-
-> ⚠️ Markdown 文件最好用 `#`、`##`、`###` 等标题层级，效果最好！
-
-### 第四步：修改入口文件
-
-打开 `rag_generate.py`，修改第 158 行：
-
-```python
-MD_FILE_PATH = "data/你的笔记文件.md"   # 改成你的文件路径
+```bash
+DB_DIR=./database
+QA_DB_PATH=C:\Users\86185\AppData\Local\Temp\RAG-Study-main\qa_messages.sqlite3
+LLM_MODEL_NAME=qwen-plus
+LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+QA_USE_TEMPORAL=true
+TEMPORAL_ADDRESS=localhost:7233
+TEMPORAL_TASK_QUEUE=qa-task-queue
 ```
 
-### 第五步：运行！
+### 2. 启动 HTTP 接口
 
-```powershell
-python rag_generate.py
+历史消息现在默认保存在 SQLite 数据库：
+
+```text
+C:\Users\86185\AppData\Local\Temp\RAG-Study-main\qa_messages.sqlite3
 ```
 
-系统会自动：
-1. 读取 Markdown → 切块 → 构建向量数据库（首次运行较慢）
-2. 加载检索器和大模型
-3. 进入交互问答模式，输入问题即可
+如果之前用过 `data/qa_messages.json`，可以迁移旧历史：
 
----
-
-## ⚠️ 注意事项
-
-| 问题 | 解决方法 |
-|------|----------|
-| 没有 NVIDIA GPU | 修改 `config.py` 第 42 行：`DEVICE = "cpu"` |
-| 首次运行很慢 | 正常！需要下载 Embedding 模型（约 200MB），耐心等待 |
-| 问答结果保存在哪 | 自动保存到 `我的高数学习笔记.md` |
-
----
-
-## 🧠 系统架构
-
+```bash
+python migrate_messages_to_db.py
 ```
-你的 Markdown 笔记
-       ↓
-  rag_split.py    →  按标题切块  →  ChromaDB 向量数据库
-       ↓
-  rag_agent.py    →  识别问题意图（总结/找例题/问答）
-       ↓
-  rag_retrieve.py →  向量召回 → BGE Reranker 重排序
-       ↓
-  rag_generate.py →  GLM-4 生成最终回答
-       ↓
-  保存到 Markdown 笔记文件
+
+如果还没有导入教材资料，先把 `.md` 或平台导出的 `course.json`、`knowledge_graph.json`、`problems.json`
+放到 `data` 目录，然后构建知识库：
+
+```bash
+python build_knowledge_base.py
+```
+
+如果 Windows 在项目目录写 Chroma/SQLite 时出现 `disk I/O error`，可以把向量库放到用户临时目录：
+
+```bash
+set DB_DIR=C:\Users\86185\AppData\Local\Temp\rag_database_json
+set HF_HUB_OFFLINE=1
+set TRANSFORMERS_OFFLINE=1
+python build_knowledge_base.py
+```
+
+启动接口时也要使用同一个 `DB_DIR`。
+
+```bash
+uvicorn api:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 3. 如果要走 Temporal
+
+先启动 Temporal 服务，然后另开终端启动 worker：
+
+```bash
+python worker.py
+```
+
+接口默认会优先尝试 Temporal。Temporal 没启动时会自动降级为本地同步执行，方便前端联调。
+如果希望 Temporal 连不上就直接报错，可以设置：
+
+```bash
+QA_USE_TEMPORAL=required
+```
+
+### 4. 测试接口
+
+也可以直接打开测试页面：
+
+```text
+http://localhost:8000/frontend
+```
+
+非流式问答：
+
+```bash
+curl -X POST http://localhost:8000/conversations/conv_1/messages ^
+  -H "Content-Type: application/json" ^
+  -d "{\"content\":\"导数的几何意义是什么？\",\"retrieval\":{\"limit\":5}}"
+```
+
+流式问答：
+
+```bash
+curl -N -X POST http://localhost:8000/conversations/conv_1/messages/stream ^
+  -H "Content-Type: application/json" ^
+  -d "{\"content\":\"导数的几何意义是什么？\",\"retrieval\":{\"limit\":5}}"
+```
+
+查询历史消息：
+
+```bash
+curl "http://localhost:8000/conversations/conv_1/messages?limit=20&offset=0"
 ```
