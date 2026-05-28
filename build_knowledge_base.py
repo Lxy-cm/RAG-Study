@@ -2,7 +2,7 @@ import glob
 import os
 
 from json_material_loader import load_json_materials
-from rag_split import build_and_save_retriever, process_math_markdown
+from rag_split import build_and_save_vectorstore, process_math_markdown
 
 
 def main() -> None:
@@ -26,7 +26,7 @@ def main() -> None:
     if not all_docs:
         raise ValueError("没有从资料文件中解析出可导入的文档")
 
-    build_and_save_retriever(all_docs)
+    build_and_save_vectorstore(all_docs)
     print(f"知识库构建完成，共导入 {len(all_docs)} 个父文档。")
 
 

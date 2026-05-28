@@ -6,7 +6,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 # 导入其他模块的核心组件
 from config import Config
-from rag_split import process_math_markdown, build_and_save_retriever
+from rag_split import process_math_markdown, build_and_save_vectorstore
 from rag_retrieve import MathRetriever
 from rag_agent import router_chain
 
@@ -30,7 +30,7 @@ def setup_database(md_file_path: str):
             raise FileNotFoundError(f"找不到指定的 Markdown 文件: {md_file_path}")
             
         docs = process_math_markdown(md_file_path)
-        build_and_save_retriever(docs)
+        build_and_save_vectorstore(docs)
         print("知识库构建完毕！\n")
     else:
         print(f"检测到本地数据库已存在 ({Config.DB_DIR})，直接加载。\n")
